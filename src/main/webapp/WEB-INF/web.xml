@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>UMS</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>register.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list>
+  
+ <servlet>
+<servlet-name>one</servlet-name>
+<servlet-class>pu.Controller.Register</servlet-class>
+</servlet>  
+<servlet-mapping>
+<servlet-name>one</servlet-name>
+<url-pattern>/register</url-pattern>
+</servlet-mapping>
+<servlet>
+
+
+<servlet-name>two</servlet-name>
+<servlet-class>pu.Controller.LoginUser</servlet-class>
+</servlet>  
+<servlet-mapping>
+<servlet-name>two</servlet-name>
+<url-pattern>/login</url-pattern>
+</servlet-mapping>
+
+
+
+<servlet>
+<servlet-name>three</servlet-name>
+<servlet-class>pu.Controller.DeleteNotes</servlet-class>
+</servlet>  
+<servlet-mapping>
+<servlet-name>three</servlet-name>
+<url-pattern>/deleteNote</url-pattern>
+</servlet-mapping>
+
+<servlet>
+<servlet-name>four</servlet-name>
+<servlet-class>pu.Controller.AddNote</servlet-class>
+</servlet>  
+<servlet-mapping>
+<servlet-name>four</servlet-name>
+<url-pattern>/AddNote</url-pattern>
+</servlet-mapping>
+
+<servlet>
+<servlet-name>five</servlet-name>
+<servlet-class>pu.Controller.ShowNotes</servlet-class>
+</servlet>  
+<servlet-mapping>
+<servlet-name>five</servlet-name>
+<url-pattern>/ShowNotes</url-pattern>
+</servlet-mapping>
+
+
+</web-app>
