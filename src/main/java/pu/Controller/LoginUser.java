@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class LoginUser
  */
+@WebServlet("/login")
 public class LoginUser extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -34,7 +36,7 @@ public class LoginUser extends HttpServlet {
 
             // Establish the connection to the database
             Connection c = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/pres", "root", "root@123"
+                "jdbc:mysql://localhost:3306/pres", "root", "root"
             );
 
             // SQL query to check the username and password
@@ -45,7 +47,7 @@ public class LoginUser extends HttpServlet {
             String username = request.getParameter("u");
             String password = request.getParameter("p");
             String role_1= request.getParameter("r");
-            String role = "User";
+            String role = "user";
             
 //            System.out.println(username+password+role);
 

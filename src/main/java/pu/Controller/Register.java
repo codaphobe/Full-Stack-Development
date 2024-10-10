@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-//import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Register
  */
-//@WebServlet("/Register")
+@WebServlet("/Register")
 public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,7 +31,7 @@ public class Register extends HttpServlet {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection c=DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/pres","root","root@123");
+					"jdbc:mysql://localhost:3306/pres","root","root");
 			
 			String st = "INSERT INTO user (username,password, role, email) values (?,?,?,?)";
 			
@@ -39,7 +39,7 @@ public class Register extends HttpServlet {
 			
 			ps.setString(1,request.getParameter("u"));
 			ps.setString(2,request.getParameter("p"));
-			ps.setString(3,request.getParameter("r"));
+			ps.setString(3,"user");
 			ps.setString(4,request.getParameter("e"));
 			int r = 0;
 			String e="";
@@ -51,7 +51,7 @@ public class Register extends HttpServlet {
 			}
 			
 			if (r==1){				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("redirectLogin.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("redirectLogin.html");
 		        dispatcher.forward(request, response);
 			}
 			else {
