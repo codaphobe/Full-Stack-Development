@@ -47,7 +47,7 @@ public class Register extends HttpServlet {
 				r=ps.executeUpdate();
 			}catch(java.sql.SQLIntegrityConstraintViolationException ex) {
 				e = ex.toString();
-				System.out.println(ex);				
+				System.out.println(e);
 			}
 			
 			if (r==1){				
