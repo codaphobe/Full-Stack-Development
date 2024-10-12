@@ -48,7 +48,7 @@ public class LoginUser extends HttpServlet {
             }
 
             // SQL query to check the username and password
-            String sql = "SELECT (role) FROM user WHERE username = ? AND password = ?";
+            String sql = "SELECT (role) FROM users WHERE username = ? AND password = ?";
 
             PreparedStatement p = c.prepareStatement(sql);
 

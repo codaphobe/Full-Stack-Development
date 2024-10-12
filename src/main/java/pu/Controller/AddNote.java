@@ -56,7 +56,7 @@ public class AddNote extends HttpServlet {
 	        String role = (String) session.getAttribute("role");
 //	        System.out.println(username);
 			
-	        String id_st = "select id from user where username=?";
+	        String id_st = "select (id) from users where username=?";
 	        PreparedStatement p = c.prepareStatement(id_st);
 	        
 	        p.setString(1, username);
@@ -68,7 +68,6 @@ public class AddNote extends HttpServlet {
 //	        System.out.println(rs.next());
 	        if (rs.next()) {
 	        	 id  = rs.getInt(1);
-//	        	 System.out.println(id);
 	        	 rs.close();
 	        	 p.close();
 	        }
@@ -78,12 +77,7 @@ public class AddNote extends HttpServlet {
 			int r=ps.executeUpdate();
 			response.setContentType("text/html");
 			response.getWriter().print("<h2>"+"Note Successfully Inserted"+"</h2>");
-			String homePage = (role != null && role.equals("user")) ? "home_user.jsp" : "home_admin.jsp";
-			response.getWriter().print("<a href="+homePage+">GO Back</a>");
-			
-			
-//		
-        
+
 		}
 		catch(Exception e){
 			System.out.println(e);

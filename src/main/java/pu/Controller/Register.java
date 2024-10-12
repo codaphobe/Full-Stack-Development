@@ -33,7 +33,7 @@ public class Register extends HttpServlet {
 			Connection c=DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/pres","root","root");
 			
-			String st = "INSERT INTO user (username,password, role, email) values (?,?,?,?)";
+			String st = "INSERT INTO users (username,password, role, email) values (?,?,?,?)";
 			
 			PreparedStatement ps = c.prepareStatement(st);
 			
