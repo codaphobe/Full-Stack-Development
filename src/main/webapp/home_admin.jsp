@@ -17,10 +17,7 @@
                 <a href="addNote.jsp" class="btn btn-primary btn-block">Add Note</a>
             </div>
             <div class="col-md-3 mb-3">
-                <a href="showNotes.jsp" class="btn btn-secondary btn-block">Show Notes</a>
-            </div>
-            <div class="col-md-3 mb-3">
-                <a href="deleteNote.jsp" class="btn btn-danger btn-block">Delete Notes</a>
+                <a href="showNotes.jsp" class="btn btn-secondary btn-block">Manage Notes</a>
             </div>
             <div class="col-md-3 mb-3">
                 <a href="userList.jsp" class="btn btn-info btn-block">User List</a>

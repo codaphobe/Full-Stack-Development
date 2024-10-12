@@ -75,12 +75,19 @@
                         username = ur.getString(1);
                     }
 
+
                     // Add row data to the HTML table
                     tableData.append("<tr>");
                     tableData.append("<td>").append(id).append("</td>");
                     tableData.append("<td>").append(username).append("</td>");
                     tableData.append("<td>").append(title).append("</td>");
                     tableData.append("<td>").append(content).append("</td>");
+
+                    if (session.getAttribute("role").equals("admin")) {
+                    tableData.append("<td>").append("<form action='deleteNote' method='post'><button class='btn btn-danger' type='submit' name='id' value=\'")
+                    .append(id).append("\'>Delete</button>").append("</form></td>");
+                    }
+
                     tableData.append("</tr>\n");
                 }
 

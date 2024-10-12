@@ -48,11 +48,11 @@
                     PreparedStatement ps;
                     
                     if (query != null && !query.trim().isEmpty()) {
-                        sql = "SELECT * FROM user WHERE username LIKE ?";
+                        sql = "SELECT * FROM users WHERE username LIKE ?";
                         ps = c.prepareStatement(sql);
                         ps.setString(1, "%" + query + "%");
                     } else {
-                        sql = "SELECT * FROM user";
+                        sql = "SELECT * FROM users";
                         ps = c.prepareStatement(sql);
                     }
 
