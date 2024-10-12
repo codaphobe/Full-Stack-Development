@@ -10,21 +10,21 @@
   </welcome-file-list>
   
  <servlet>
-<servlet-name>one</servlet-name>
+<servlet-name>Register</servlet-name>
 <servlet-class>pu.Controller.Register</servlet-class>
 </servlet>  
 <servlet-mapping>
-<servlet-name>one</servlet-name>
+<servlet-name>Register</servlet-name>
 <url-pattern>/register</url-pattern>
 </servlet-mapping>
 <servlet>
 
 
-<servlet-name>two</servlet-name>
+<servlet-name>pu.Controller.LoginUser</servlet-name>
 <servlet-class>pu.Controller.LoginUser</servlet-class>
 </servlet>  
 <servlet-mapping>
-<servlet-name>two</servlet-name>
+<servlet-name>pu.Controller.LoginUser</servlet-name>
 <url-pattern>/login</url-pattern>
 </servlet-mapping>
 

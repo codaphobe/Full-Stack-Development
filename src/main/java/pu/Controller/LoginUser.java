@@ -6,14 +6,17 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 /**
  * Servlet implementation class LoginUser
  */
+@WebServlet("/login")
 public class LoginUser extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -33,7 +36,7 @@ public class LoginUser extends HttpServlet {
 
             // Establish the connection to the database
             Connection c = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/pres", "root", "root@123"
+                "jdbc:mysql://localhost:3306/pres", "root", "root"
             );
 
             // SQL query to check the username and password
@@ -43,11 +46,11 @@ public class LoginUser extends HttpServlet {
             // Get the username and password from the request
             String username = request.getParameter("u");
             String password = request.getParameter("p");
-            String role = request.getParameter("r");
+            String role_1= request.getParameter("r");
+            String role = "user";
             
 //            System.out.println(username+password+role);
-            
-            
+
             // Set the parameters for the prepared statement
             p.setString(1, username);
             p.setString(2, password);
@@ -58,14 +61,13 @@ public class LoginUser extends HttpServlet {
             // Set attributes in the session
             session.setAttribute("username", username);
             session.setAttribute("role", role);
-//            System.out.println(session.getAttribute("role"));
+//          System.out.println(session.getAttribute("role"));
             // Execute the query
             ResultSet rs = p.executeQuery();
 
             // Check if a record was found
             if (rs.next()) {
                 // Successful login, redirect to the home page
-            	
             	if (role.equals("user")){
             			response.sendRedirect("home_user.jsp");
             	}else if(role.equals("admin")) {
