@@ -41,6 +41,7 @@ public class AddNote extends HttpServlet {
 			String desc = request.getParameter("d");
 //			int uid = 1;
 			int id=12;
+
 			
 			
 			ps.setString(2,title);
