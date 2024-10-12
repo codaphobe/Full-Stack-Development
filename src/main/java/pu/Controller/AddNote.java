@@ -41,9 +41,6 @@ public class AddNote extends HttpServlet {
 			String desc = request.getParameter("d");
 //			int uid = 1;
 			int id=0;
-
-			
-			
 			ps.setString(2,title);
 			ps.setString(3, desc);
 //			ps.setInt(1,uid);
@@ -75,13 +72,12 @@ public class AddNote extends HttpServlet {
 	        ps.setInt(1,id);
 	        
 			int r=ps.executeUpdate();
-			response.setContentType("text/html");
-			response.getWriter().print("<h2>"+"Note Successfully Inserted"+"</h2>");
 
 		}
 		catch(Exception e){
 			System.out.println(e);
 		}
+		response.sendRedirect("addNote.jsp");
 	}
 
 }
