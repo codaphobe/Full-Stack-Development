@@ -32,7 +32,7 @@ public class AddNote extends HttpServlet {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection c=DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/pres","root","root@123");
+					"jdbc:mysql://localhost:3306/pres","root","root");
 			
 			String st = "insert into notes(user_id,title,content) values (?,?,?);";
 			PreparedStatement ps = c.prepareStatement(st);
