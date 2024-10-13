@@ -42,17 +42,17 @@
                 String query = request.getParameter("query");
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
-                    Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/pres", "root", "root@123");
+                    Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/pres", "root", "root");
 
                     String sql;
                     PreparedStatement ps;
                     
                     if (query != null && !query.trim().isEmpty()) {
-                        sql = "SELECT * FROM user WHERE username LIKE ?";
+                        sql = "SELECT * FROM users WHERE username LIKE ?";
                         ps = c.prepareStatement(sql);
                         ps.setString(1, "%" + query + "%");
                     } else {
-                        sql = "SELECT * FROM user";
+                        sql = "SELECT * FROM users";
                         ps = c.prepareStatement(sql);
                     }
 
@@ -91,10 +91,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
-    <center>
-    <a href="home_admin.jsp">Go Back</a>
-    </center>
-    
+
 </body>
 </html>

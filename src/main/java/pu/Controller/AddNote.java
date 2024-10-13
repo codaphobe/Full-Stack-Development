@@ -32,7 +32,7 @@ public class AddNote extends HttpServlet {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection c=DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/pres","root","root@123");
+					"jdbc:mysql://localhost:3306/pres","root","root");
 			
 			String st = "insert into notes(user_id,title,content) values (?,?,?);";
 			PreparedStatement ps = c.prepareStatement(st);
@@ -40,9 +40,7 @@ public class AddNote extends HttpServlet {
 			String title = request.getParameter("t");
 			String desc = request.getParameter("d");
 //			int uid = 1;
-			int id=12;
-			
-			
+			int id=0;
 			ps.setString(2,title);
 			ps.setString(3, desc);
 //			ps.setInt(1,uid);
@@ -55,7 +53,7 @@ public class AddNote extends HttpServlet {
 	        String role = (String) session.getAttribute("role");
 //	        System.out.println(username);
 			
-	        String id_st = "select id from user where username=?";
+	        String id_st = "select (id) from users where username=?";
 	        PreparedStatement p = c.prepareStatement(id_st);
 	        
 	        p.setString(1, username);
@@ -67,7 +65,6 @@ public class AddNote extends HttpServlet {
 //	        System.out.println(rs.next());
 	        if (rs.next()) {
 	        	 id  = rs.getInt(1);
-	        	 System.out.println(id);
 	        	 rs.close();
 	        	 p.close();
 	        }
@@ -75,18 +72,12 @@ public class AddNote extends HttpServlet {
 	        ps.setInt(1,id);
 	        
 			int r=ps.executeUpdate();
-			response.setContentType("text/html");
-			response.getWriter().print("<h2>"+"Note Successfully Inserted"+"</h2>");
-			String homePage = (role != null && role.equals("user")) ? "home_user.jsp" : "home_admin.jsp";
-			response.getWriter().print("<a href="+homePage+">GO Back</a>");
-			
-			
-//		
-        
+
 		}
 		catch(Exception e){
 			System.out.println(e);
 		}
+		response.sendRedirect("addNote.jsp");
 	}
 
 }

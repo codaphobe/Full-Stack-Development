@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import static java.lang.System.out;
+
 
 /**
  * Servlet implementation class LoginUser
@@ -30,7 +32,7 @@ public class LoginUser extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-        	
+
             // Load the MySQL JDBC driver
             Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -39,42 +41,46 @@ public class LoginUser extends HttpServlet {
                 "jdbc:mysql://localhost:3306/pres", "root", "root"
             );
 
+            if (c != null) {
+                System.out.println("Connection succeeded.");
+            } else {
+                System.out.println("Connection failed.");
+            }
+
             // SQL query to check the username and password
-            String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
+            String sql = "SELECT (role) FROM users WHERE username = ? AND password = ?";
+
             PreparedStatement p = c.prepareStatement(sql);
+
 
             // Get the username and password from the request
             String username = request.getParameter("u");
             String password = request.getParameter("p");
-            String role_1= request.getParameter("r");
-            String role = "user";
-            
-//            System.out.println(username+password+role);
 
             // Set the parameters for the prepared statement
             p.setString(1, username);
             p.setString(2, password);
-            
+
             //Http session
             HttpSession session = request.getSession(true);
-            
+
             // Set attributes in the session
             session.setAttribute("username", username);
-            session.setAttribute("role", role);
-//          System.out.println(session.getAttribute("role"));
+            session.setAttribute("password", password);
+
+
             // Execute the query
             ResultSet rs = p.executeQuery();
 
-            // Check if a record was found
-            if (rs.next()) {
-                // Successful login, redirect to the home page
-            	if (role.equals("user")){
-            			response.sendRedirect("home_user.jsp");
-            	}else if(role.equals("admin")) {
-            		response.sendRedirect("home_admin.jsp");
+            if (rs.next() && rs.isLast()) {
+                session.setAttribute("role",rs.getString(1));
+                    if (rs.getString(1).equals("user")){
+                        response.sendRedirect("home_user.jsp");
+                    }else if(rs.getString(1).equals("admin")) {
+            		    response.sendRedirect("home_admin.jsp");
             	}
-            } else {
-                // Unsuccessful login, send an error message
+            }else {
+              //Unsuccessful login, send an error message
                 response.setContentType("text/html");
                 response.getWriter().print("<h2>Invalid username or password</h2>");
             }

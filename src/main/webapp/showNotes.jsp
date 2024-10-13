@@ -31,7 +31,7 @@
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection c = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/pres", "root", "root@123");
+                    "jdbc:mysql://localhost:3306/pres", "root", "root");
 
                 // Prepare the SQL query
                 String sql;
@@ -55,7 +55,7 @@
                 tableData.append("<table class='table table-striped table-bordered'>\n");
 
                 // Add table headers
-                tableData.append("<thead><tr><th>ID</th><th>User ID</th><th>Title</th><th>Content</th></tr></thead>\n");
+                tableData.append("<thead><tr><th>ID</th><th>User Name</th><th>Title</th><th>Content</th></tr></thead>\n");
                 tableData.append("<tbody>");
 
                 // Iterate through the result set
@@ -66,12 +66,28 @@
                     String title = resultSet.getString("title");
                     String content = resultSet.getString("content");
 
+                    //Retrieve all user name
+                    PreparedStatement st = c.prepareStatement("select (username) from users where id = ?");
+                    st.setInt(1,userId);
+                    ResultSet ur = st.executeQuery();
+                    String username = "";
+                    if (ur.next() && ur.isLast()){
+                        username = ur.getString(1);
+                    }
+
+
                     // Add row data to the HTML table
                     tableData.append("<tr>");
                     tableData.append("<td>").append(id).append("</td>");
-                    tableData.append("<td>").append(userId).append("</td>");
+                    tableData.append("<td>").append(username).append("</td>");
                     tableData.append("<td>").append(title).append("</td>");
                     tableData.append("<td>").append(content).append("</td>");
+
+                    if (session.getAttribute("role").equals("admin")) {
+                    tableData.append("<td>").append("<form action='deleteNote' method='post'><button class='btn btn-danger' type='submit' name='id' value=\'")
+                    .append(id).append("\'>Delete</button>").append("</form></td>");
+                    }
+
                     tableData.append("</tr>\n");
                 }
 
@@ -96,13 +112,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
-    <%
-    String role  = (String)session.getAttribute("role");
-    String homePage = (role != null && role.equals("user")) ? "home_user.jsp" : "home_admin.jsp";
-    %>  
-    <center>
-    <a href="<%= homePage %>">Go Back</a>
-    </center>
+
 </body>
 </html>
