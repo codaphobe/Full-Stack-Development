@@ -31,11 +31,11 @@
 
 
 <servlet>
-<servlet-name>three</servlet-name>
+<servlet-name>pu.Controller.DeleteNotes</servlet-name>
 <servlet-class>pu.Controller.DeleteNotes</servlet-class>
 </servlet>  
 <servlet-mapping>
-<servlet-name>three</servlet-name>
+<servlet-name>pu.Controller.DeleteNotes</servlet-name>
 <url-pattern>/deleteNote</url-pattern>
 </servlet-mapping>
 
